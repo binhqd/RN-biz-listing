@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SideMenu, List, ListItem } from 'react-native-elements'
+import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements'
 import {
   StyleSheet,
   Text,
@@ -13,7 +13,12 @@ class Home extends React.Component {
     return {
       title: 'Dashboard',
       headerRight: (
-        <Button title={"Menu"} onPress={() => state.params.handleMenuToggle()} />
+        <Icon
+          name='menu'
+          type='material-community'
+          color='#f50'
+          onPress={() => state.params.handleMenuToggle()}
+        />
 
       ),
     };
@@ -58,6 +63,9 @@ class Home extends React.Component {
             onChange={this.onSideMenuChange.bind(this)}
             menu={MenuComponent}>
           <View>
+            <SearchBar
+
+              placeholder='Type Here...' />
             <Text>Hello, This is Homepage!</Text>
             <Button
               onPress={() => navigate('List', { user: 'Lucy' })}
