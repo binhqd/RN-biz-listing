@@ -14,8 +14,8 @@ class Home extends React.Component {
       title: 'Dashboard',
       headerRight: (
         <Icon
-          name='menu'
-          type='material-community'
+          name='bars'
+          type='font-awesome'
           color='#f50'
           onPress={() => state.params.handleMenuToggle()}
         />
