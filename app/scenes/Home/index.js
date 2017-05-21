@@ -82,8 +82,8 @@ class Home extends React.Component {
 
     _genRows(pressData: {[key: number]: boolean}): Array<string> {
       var dataBlob = [];
-      for (var ii = 0; ii < 15; ii++) {
-        dataBlob.push('Cell ' + ii);
+      for (var ii = 1; ii <= 15; ii++) {
+        dataBlob.push('Category ' + ii);
       }
       return dataBlob;
     }

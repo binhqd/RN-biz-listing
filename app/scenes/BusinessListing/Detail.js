@@ -38,16 +38,22 @@ class BusinessDetail extends React.Component {
       website: 'http://theircompany.com'
     };
 
+    let images = [];
+    images.push(require('./1.jpg'));
+    images.push(require('./2.jpg'));
+    images.push(require('./3.jpg'));
+
     this.state = {
       dataSource: ds.cloneWithRows(dumpBiz),
-      biz: dumpBiz
+      biz: dumpBiz,
+      images: images
     };
   }
 
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View style={ { flex: 1, flexDirection: 'column', backgroundColor: '#fff', padding: 20} }>
+      <View style={ { flex: 1, flexDirection: 'column', backgroundColor: '#fff', padding: 20 } }>
         <View>
           <Text>
             { this.state.biz.name }
@@ -66,25 +72,25 @@ class BusinessDetail extends React.Component {
         <View style={ styles.mapContainer }>
           <MapView style={ styles.map } region={ { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } } />
         </View>
-        <View style={ { flex: 1, flexDirection: 'row', justifyContent: 'center' } }>
-          <Image style={ { flexGrow: 1 } } source={ { uri: '../../assets/images/logos/1.jpg' } } />
-          <Image style={ { flexGrow: 1 } } source={ { uri: '../../assets/images/logos/2.jpg' } } />
-          <Image style={ { flexGrow: 1 } } source={ { uri: '../../assets/images/logos/2.jpg' } } />
+        <View style={ { flex: 1, flexDirection: 'row', justifyContent: 'space-around' } }>
+          <Image style={ styles.bizThumbnail } source={ this.state.images[0] } />
+          <Image style={ styles.bizThumbnail } source={ this.state.images[1] } />
+          <Image style={ styles.bizThumbnail } source={ this.state.images[2] } />
         </View>
         <View>
           <Text style={ { fontWeight: 'bold' } }>Thông tin:</Text>
           <Text>Add. NO:
             { this.state.biz.address }
           </Text>
-          <Text>Tel: { this.state.biz.phone }
+          <Text>Tel:
+            { this.state.biz.phone }
           </Text>
-          <Text>Fax: { this.state.biz.fax }
+          <Text>Fax:
+            { this.state.biz.fax }
           </Text>
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text>Website:</Text>
-            <Text style={{color: '#0000ff'}}>{ this.state.biz.website }</Text>
-          </View>
-
+          <Text>Website:
+            { this.state.biz.website }
+          </Text>
         </View>
       </View>
       );
@@ -127,6 +133,10 @@ var styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  bizThumbnail: {
+    width: 100,
+    height: 75
+  }
 
 });
 
