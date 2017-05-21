@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements'
+import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
 import {
   StyleSheet,
   Text,
@@ -40,7 +40,7 @@ class Home extends React.Component {
       dataSource: ds.cloneWithRows(this._genRows({})),
     };
 
-    this.THUMB_URLS = ['https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851549_767334479959628_274486868_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851561_767334496626293_1958532586_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851579_767334503292959_179092627_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851589_767334513292958_1747022277_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851563_767334559959620_1193692107_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851593_767334566626286_1953955109_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851591_767334523292957_797560749_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851567_767334529959623_843148472_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851548_767334489959627_794462220_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851575_767334539959622_441598241_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851573_767334549959621_534583464_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851583_767334573292952_1519550680_n.png'];
+    this.THUMB_URLS = ['http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/shop-icon.png'];
   }
 
   _pressData = ({}: {[key: number]: boolean})
@@ -62,18 +62,9 @@ class Home extends React.Component {
     })
   }
 
-  hashCode(str) {
-    var hash = 15;
-    for (var ii = str.length - 1; ii >= 0; ii--) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(ii);
-    }
-    return hash;
-  };
-
   _renderRow(rowData: string, sectionID: number, rowID: number) {
-      var rowHash = Math.abs(this.hashCode(rowData));
       var imgSource = {
-        uri: this.THUMB_URLS[rowHash % this.THUMB_URLS.length],
+        uri: this.THUMB_URLS[0],
       };
       return (
         <TouchableHighlight onPress={() => this._pressRow(rowID)} underlayColor='rgba(0,0,0,0)'>
@@ -91,18 +82,14 @@ class Home extends React.Component {
 
     _genRows(pressData: {[key: number]: boolean}): Array<string> {
       var dataBlob = [];
-      for (var ii = 0; ii < 100; ii++) {
-        var pressedText = pressData[ii] ? ' (X)' : '';
-        dataBlob.push('Cell ' + ii + pressedText);
+      for (var ii = 0; ii < 15; ii++) {
+        dataBlob.push('Cell ' + ii);
       }
       return dataBlob;
     }
 
     _pressRow(rowID: number) {
-      this._pressData[rowID] = !this._pressData[rowID];
-      this.setState({dataSource: this.state.dataSource.cloneWithRows(
-        this._genRows(this._pressData)
-      )});
+      this.props.navigation.navigate('ListBusinesses', { categoryId: 'Lucy' })
     }
 
   render() {
@@ -126,13 +113,13 @@ class Home extends React.Component {
             <View>
                 <SearchBar placeholder='Type Here...' />
             </View>
-            <View style={{backgroundColor: 'skyblue'}}>
+            <View style={{backgroundColor: '#fff'}}>
                 <ListView contentContainerStyle={styles.list}
                     dataSource={this.state.dataSource}
                     renderRow={this._renderRow.bind(this)}
                   />
                 <Button
-                  onPress={() => navigate('List', { user: 'Lucy' })}
+                  onPress={() => navigate('ListBusiness', { categoryId: 'Lucy' })}
                   title="Chat with Lucy"
                 />
             </View>

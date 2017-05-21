@@ -1,0 +1,4 @@
+{
+  // executes plugins in the same order as listed in the Array
+  "plugins": [ "esformatter-jsx" ]
+}
