@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
 import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
 import MapView from 'react-native-maps';
+import { BizInfo } from '../../components/BusinessDetail';
 
 class BusinessDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -55,7 +56,7 @@ class BusinessDetail extends React.Component {
     return (
       <View style={ { flex: 1, flexDirection: 'column', backgroundColor: '#fff', padding: 20 } }>
         <View>
-          <Text>
+          <Text style={styles.bizTitle}>
             { this.state.biz.name }
           </Text>
         </View>
@@ -77,21 +78,7 @@ class BusinessDetail extends React.Component {
           <Image style={ styles.bizThumbnail } source={ this.state.images[1] } />
           <Image style={ styles.bizThumbnail } source={ this.state.images[2] } />
         </View>
-        <View>
-          <Text style={ { fontWeight: 'bold' } }>Thông tin:</Text>
-          <Text>Add. NO:
-            { this.state.biz.address }
-          </Text>
-          <Text>Tel:
-            { this.state.biz.phone }
-          </Text>
-          <Text>Fax:
-            { this.state.biz.fax }
-          </Text>
-          <Text>Website:
-            { this.state.biz.website }
-          </Text>
-        </View>
+        <BizInfo biz={this.state.biz}/>
       </View>
       );
   }
@@ -114,6 +101,9 @@ var styles = StyleSheet.create({
     width: 64,
     height: 64
   },
+  bizTitle: {
+    fontWeight: 'bold'
+  },
   text: {
     margin: 5,
     marginBottom: 0,
@@ -132,6 +122,11 @@ var styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   },
   bizThumbnail: {
     width: 100,
