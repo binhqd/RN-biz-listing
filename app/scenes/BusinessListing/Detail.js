@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
 import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
 import MapView from 'react-native-maps';
-import { BizInfo } from '../../components/BusinessDetail';
+import { BizInfo, BizImageList } from '../../components/BusinessDetail';
 
 class BusinessDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -39,15 +39,9 @@ class BusinessDetail extends React.Component {
       website: 'http://theircompany.com'
     };
 
-    let images = [];
-    images.push(require('./1.jpg'));
-    images.push(require('./2.jpg'));
-    images.push(require('./3.jpg'));
-
     this.state = {
       dataSource: ds.cloneWithRows(dumpBiz),
-      biz: dumpBiz,
-      images: images
+      biz: dumpBiz
     };
   }
 
@@ -73,11 +67,7 @@ class BusinessDetail extends React.Component {
         <View style={ styles.mapContainer }>
           <MapView style={ styles.map } region={ { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } } />
         </View>
-        <View style={ { flex: 1, flexDirection: 'row', justifyContent: 'space-around' } }>
-          <Image style={ styles.bizThumbnail } source={ this.state.images[0] } />
-          <Image style={ styles.bizThumbnail } source={ this.state.images[1] } />
-          <Image style={ styles.bizThumbnail } source={ this.state.images[2] } />
-        </View>
+        <BizImageList/>
         <BizInfo biz={this.state.biz}/>
       </View>
       );
@@ -127,10 +117,6 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0
-  },
-  bizThumbnail: {
-    width: 100,
-    height: 75
   }
 
 });
