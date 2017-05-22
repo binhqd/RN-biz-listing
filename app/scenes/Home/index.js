@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   Image
 } from 'react-native';
+import { MenuComponent } from '../../components/SideMenu';
 
 class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -93,13 +94,6 @@ class Home extends React.Component {
     }
 
   render() {
-
-    const MenuComponent = (
-        <View style={{flex: 1, backgroundColor: '#ededed', paddingTop: 50}}>
-          <Text>This is Menu!</Text>
-        </View>
-      )
-
     const { navigate } = this.props.navigation;
     return (
       <SideMenu
