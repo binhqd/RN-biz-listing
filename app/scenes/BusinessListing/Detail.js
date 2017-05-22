@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
-import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
-import MapView from 'react-native-maps';
-import { BizInfo, BizImageList } from '../../components/BusinessDetail';
+import { StyleSheet, Text, View, Button, ListView, Image } from 'react-native';
+import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
 
 class BusinessDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -64,9 +63,7 @@ class BusinessDetail extends React.Component {
             </Text>
           </View>
         </View>
-        <View style={ styles.mapContainer }>
-          <MapView style={ styles.map } region={ { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } } />
-        </View>
+        <BizGMap/>
         <BizImageList/>
         <BizInfo biz={this.state.biz}/>
       </View>
@@ -102,23 +99,7 @@ var styles = StyleSheet.create({
   },
   description: {
     margin: 5
-  },
-
-  mapContainer: {
-    ...StyleSheet.absoluteFillObject,
-    height: 300,
-    width: 400,
-    alignItems: 'center',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
   }
-
 });
 
 export default BusinessDetail;
