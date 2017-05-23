@@ -60,7 +60,7 @@ class BusinessDetail extends React.Component {
             </Text>
           </View>
         </View>
-        <BizGMap/>
+        <BizGMap lat={this.state.biz.lat} lng={this.state.biz.lng}/>
         <BizImageList/>
         <BizInfo biz={this.state.biz}/>
       </View>

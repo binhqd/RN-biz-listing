@@ -4,17 +4,18 @@ import MapView from 'react-native-maps';
 
 class BizGMap extends React.Component {
   render() {
-    return (
-      <View style={ styles.mapContainer }>
-        <MapView style={ styles.map }
-                 region={ {
-                            latitude: 37.78825,
-                            longitude: -122.4324,
-                            latitudeDelta: 0.015,
-                            longitudeDelta: 0.0121,
-                          } } />
-      </View>
-      );
+    if (typeof this.props.lat != 'undefined' && typeof this.props.lng != 'undefined') {
+      return (
+        <View style={ styles.mapContainer }>
+          <MapView style={ styles.map } region={ {
+                                                   latitude: this.props.lat,
+                                                   longitude: this.props.lng
+                                                 } } />
+        </View>
+        );
+    } else {
+      return null;
+    }
   }
 }
 
