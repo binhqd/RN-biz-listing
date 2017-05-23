@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
+import { SideMenu, List, ListItem, Icon, SearchBar, Button } from 'react-native-elements';
 import { StyleSheet, Text, View, Button, ListView, Image, ScrollView } from 'react-native';
 import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
 
@@ -63,6 +63,7 @@ class BusinessDetail extends React.Component {
         <BizGMap lat={this.state.biz.lat} lng={this.state.biz.lng}/>
         <BizImageList/>
         <BizInfo biz={this.state.biz}/>
+        
       </View>
       </ScrollView>
       );
