@@ -6,7 +6,15 @@ class BizGMap extends React.Component {
   render() {
     return (
       <View style={ styles.mapContainer }>
-        <MapView style={ styles.map } region={ { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } } />
+        <MapView style={ styles.map }
+        region={
+            {
+                latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.015,
+                            longitudeDelta: 0.0121,
+            }
+        } />
       </View>
       );
   }
@@ -17,7 +25,6 @@ var styles = StyleSheet.create({
     height: 300,
     width: 400,
     alignItems: 'center',
-    backgroundColor: '#00ff00',
     marginTop: 10,
     marginBottom: 10
   },
