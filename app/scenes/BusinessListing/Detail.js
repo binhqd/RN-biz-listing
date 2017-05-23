@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
-import { StyleSheet, Text, View, Button, ListView, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, ListView, Image, ScrollView } from 'react-native';
 import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
 
 class BusinessDetail extends React.Component {
@@ -23,9 +23,6 @@ class BusinessDetail extends React.Component {
 
   constructor() {
     super()
-    var ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
 
     let dumpBiz = {
       id: 1,
@@ -39,7 +36,6 @@ class BusinessDetail extends React.Component {
     };
 
     this.state = {
-      dataSource: ds.cloneWithRows(dumpBiz),
       biz: dumpBiz
     };
   }
@@ -47,6 +43,7 @@ class BusinessDetail extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
+        <ScrollView>
       <View style={ { flex: 1, flexDirection: 'column', backgroundColor: '#fff', padding: 20 } }>
         <View>
           <Text style={styles.bizTitle}>
@@ -67,15 +64,12 @@ class BusinessDetail extends React.Component {
         <BizImageList/>
         <BizInfo biz={this.state.biz}/>
       </View>
+      </ScrollView>
       );
   }
 }
 
 var styles = StyleSheet.create({
-  list: {
-    justifyContent: 'center',
-    flexDirection: 'column'
-  },
   row: {
     flexDirection: 'row',
     padding: 5,

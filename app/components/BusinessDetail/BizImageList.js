@@ -17,7 +17,7 @@ class BizImageList extends React.Component {
   }
   render() {
     return (
-      <View style={ { flex: 1, flexDirection: 'row', justifyContent: 'space-around' } }>
+      <View style={ styles.container }>
         <Image style={ styles.bizThumbnail } source={ this.state.images[0] } />
         <Image style={ styles.bizThumbnail } source={ this.state.images[1] } />
         <Image style={ styles.bizThumbnail } source={ this.state.images[2] } />
@@ -27,6 +27,13 @@ class BizImageList extends React.Component {
 }
 
 let styles = {
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 10,
+    marginBottom: 10
+  },
   bizThumbnail: {
     width: 100,
     height: 75

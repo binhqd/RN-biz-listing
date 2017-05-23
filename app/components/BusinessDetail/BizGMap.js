@@ -14,18 +14,15 @@ class BizGMap extends React.Component {
 
 var styles = StyleSheet.create({
   mapContainer: {
-    ...StyleSheet.absoluteFillObject,
     height: 300,
     width: 400,
     alignItems: 'center',
+    backgroundColor: '#00ff00',
+    marginTop: 10,
+    marginBottom: 10
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
+
   }
 });
 
