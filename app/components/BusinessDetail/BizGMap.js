@@ -9,7 +9,9 @@ class BizGMap extends React.Component {
         <View style={ styles.mapContainer }>
           <MapView style={ styles.map } region={ {
                                                    latitude: this.props.lat,
-                                                   longitude: this.props.lng
+                                                   longitude: this.props.lng,
+                                                   latitudeDelta: 0,
+                                                   longitudeDelta: 0
                                                  } } />
         </View>
         );

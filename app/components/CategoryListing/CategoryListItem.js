@@ -10,14 +10,12 @@ class CategoryListItem extends React.Component {
   }
 
   render() {
-    let imgSource = {
-      uri: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/shop-icon.png'
-    }
+
     return (
       <TouchableHighlight onPress={ () => this._pressRow(1) } underlayColor='rgba(0,0,0,0)'>
         <View>
           <View style={ styles.row }>
-            <Image style={ styles.thumb } source={ imgSource } />
+            <Image style={ styles.thumb } source={ this.props.image } />
             <Text style={ styles.text }>
               { this.props.category.name }
             </Text>
@@ -35,7 +33,7 @@ let styles = StyleSheet.create({
     padding: 5,
     margin: 10,
     width: 100,
-    height: 100,
+    height: 120,
     backgroundColor: '#F6F6F6',
     alignItems: 'center',
     borderWidth: 1,
@@ -49,7 +47,7 @@ let styles = StyleSheet.create({
   text: {
     flex: 1,
     marginTop: 5,
-    fontWeight: 'bold'
+    textAlign: 'center'
   }
 });
 

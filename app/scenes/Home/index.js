@@ -30,8 +30,36 @@ class Home extends React.Component {
     var ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
+
+    let dump = require('../../dump/dumpCategories');
+
+    let imgSources = [];
+
+    imgSources.push(require('../../dump/logos/1.png'));
+    imgSources.push(require('../../dump/logos/2.png'));
+    imgSources.push(require('../../dump/logos/3.png'));
+    imgSources.push(require('../../dump/logos/4.png'));
+    imgSources.push(require('../../dump/logos/5.png'));
+    imgSources.push(require('../../dump/logos/6.png'));
+    imgSources.push(require('../../dump/logos/7.png'));
+    imgSources.push(require('../../dump/logos/8.png'));
+    imgSources.push(require('../../dump/logos/9.png'));
+    imgSources.push(require('../../dump/logos/10.png'));
+    imgSources.push(require('../../dump/logos/11.png'));
+    imgSources.push(require('../../dump/logos/12.png'));
+    imgSources.push(require('../../dump/logos/13.png'));
+    imgSources.push(require('../../dump/logos/14.png'));
+    imgSources.push(require('../../dump/logos/15.png'));
+    imgSources.push(require('../../dump/logos/16.png'));
+    imgSources.push(require('../../dump/logos/17.png'));
+    imgSources.push(require('../../dump/logos/18.png'));
+    imgSources.push(require('../../dump/logos/19.png'));
+    imgSources.push(require('../../dump/logos/20.png'));
+    imgSources.push(require('../../dump/logos/21.png'));
+
     this.state = {
-      dataSource: ds.cloneWithRows(this._genRows({})),
+      dataSource: ds.cloneWithRows(dump.categories),
+      images: imgSources
     };
 
   }
@@ -54,19 +82,9 @@ class Home extends React.Component {
     })
   }
 
-  _genRows(pressData: {[key: number]: boolean}): Array<string> {
-    var dataBlob = [];
-    for (var ii = 1; ii <= 15; ii++) {
-      dataBlob.push({
-        name: 'Category ' + ii
-      });
-    }
-    return dataBlob;
-  }
-
   render() {
     const {navigate} = this.props.navigation;
-    let menu = <MenuComponent/>
+    let menu = <MenuComponent navigation={this.props.navigation}/>
     return (
       <SideMenu isOpen={ this.state.isOpen }
                 onChange={ this.onSideMenuChange.bind(this) }
@@ -75,7 +93,10 @@ class Home extends React.Component {
           <SearchBar placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
           <ListView contentContainerStyle={ styles.list }
                     dataSource={ this.state.dataSource }
-                    renderRow={ (rowData) => <CategoryListItem category={ rowData } navigation={ this.props.navigation } /> } />
+                    renderRow={ (rowData) => {
+                      let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
+                      return <CategoryListItem category={ rowData } image={imgSource} navigation={ this.props.navigation } />
+                    }} />
         </View>
       </SideMenu>
       );

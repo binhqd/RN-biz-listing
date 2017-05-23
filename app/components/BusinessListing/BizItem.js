@@ -13,16 +13,12 @@ class BizItem extends React.Component {
   }
 
   render() {
-    let img = {
-        uri: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/shop-icon.png'
-    }
-
     return (
       <TouchableHighlight underlayColor='rgba(0,0,0,0)'
         onPress={ () => this.props.navigation.navigate('BizDetail', { businessId: 'Lucy' }) }>
         <View style={ styles.row }>
           <View>
-            <Image style={ styles.thumb } source={ img } />
+            <Image style={ styles.thumb } source={ this.props.image } />
           </View>
           <View style={ { flex: 1, flexDirection: 'column', marginLeft: 5 } }>
             <Text style={ styles.text }>

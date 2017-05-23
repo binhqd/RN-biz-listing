@@ -28,16 +28,43 @@ class ListBusinesses extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    let dumpBiz = require('./dumpbiz');
+    let dumpBiz = require('../../dump/dumpbiz');
+
+    let imgSources = [];
+
+    imgSources.push(require('../../dump/logos/1.png'));
+    imgSources.push(require('../../dump/logos/2.png'));
+    imgSources.push(require('../../dump/logos/3.png'));
+    imgSources.push(require('../../dump/logos/4.png'));
+    imgSources.push(require('../../dump/logos/5.png'));
+    imgSources.push(require('../../dump/logos/6.png'));
+    imgSources.push(require('../../dump/logos/7.png'));
+    imgSources.push(require('../../dump/logos/8.png'));
+    imgSources.push(require('../../dump/logos/9.png'));
+    imgSources.push(require('../../dump/logos/10.png'));
+    imgSources.push(require('../../dump/logos/11.png'));
+    imgSources.push(require('../../dump/logos/12.png'));
+    imgSources.push(require('../../dump/logos/13.png'));
+    imgSources.push(require('../../dump/logos/14.png'));
+    imgSources.push(require('../../dump/logos/15.png'));
+    imgSources.push(require('../../dump/logos/16.png'));
+    imgSources.push(require('../../dump/logos/17.png'));
+    imgSources.push(require('../../dump/logos/18.png'));
+    imgSources.push(require('../../dump/logos/19.png'));
+    imgSources.push(require('../../dump/logos/20.png'));
+    imgSources.push(require('../../dump/logos/21.png'));
 
     this.state = {
       dataSource: ds.cloneWithRows(dumpBiz),
+      images: imgSources
     };
   }
 
   _renderRow(rowData: object, sectionID: number, rowID: number) {
+    let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
+
     return (
-      <BizItem navigation={ this.props.navigation } biz={ rowData } />
+      <BizItem navigation={ this.props.navigation } biz={ rowData } image={imgSource}/>
       );
   }
 

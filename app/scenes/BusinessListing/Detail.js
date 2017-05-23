@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar, Button } from 'react-native-elements';
-import { StyleSheet, Text, View, Button, ListView, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ListView, Image, ScrollView } from 'react-native';
 import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
 
 class BusinessDetail extends React.Component {
@@ -60,10 +60,15 @@ class BusinessDetail extends React.Component {
             </Text>
           </View>
         </View>
-        <BizGMap lat={this.state.biz.lat} lng={this.state.biz.lng}/>
+        <BizGMap lat={45} lng={35}/>
         <BizImageList/>
         <BizInfo biz={this.state.biz}/>
-        
+        <View style={ styles.panelButtons }>
+            <Button buttonStyle={ styles.btnAction }
+              raised
+              icon={{name: 'globe', type: 'font-awesome'}}
+              title='Website' />
+        </View>
       </View>
       </ScrollView>
       );
@@ -94,6 +99,15 @@ var styles = StyleSheet.create({
   },
   description: {
     margin: 5
+  },
+  btnAction: {
+    width: 100,
+    borderRadius: 5,
+    height: 30
+  },
+  panelButtons: {
+    marginBottom: 10,
+    marginTop: 10
   }
 });
 
