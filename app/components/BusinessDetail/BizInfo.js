@@ -1,27 +1,34 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-let styles = {
-
-}
-
 class BizInfo extends React.Component {
+  showBizInfo(title, content) {
+    if (typeof content != 'undefined' && content) {
+      return <Text>
+               { title }: { content }
+             </Text>
+    }
+  }
   render() {
     return (
       <View>
-        <Text style={ { fontWeight: 'bold' } }>Thông tin:</Text>
-        <Text>Add. NO: { this.props.biz.address }
+        <Text style={ styles.infoTitle }>
+          Thông tin:
         </Text>
-        <Text>Tel: { this.props.biz.phone }
-        </Text>
-        <Text>Fax: { this.props.biz.fax }
-        </Text>
-        <Text>Website: { this.props.biz.website }
-        </Text>
+        { this.showBizInfo('Add. NO', this.props.biz.address) }
+        { this.showBizInfo('Tel', this.props.biz.phone) }
+        { this.showBizInfo('Fax', this.props.biz.fax) }
+        { this.showBizInfo('Website', this.props.biz.website) }
+
       </View>
       );
   }
-
 }
+
+let styles = StyleSheet.create({
+  infoTitle: {
+    fontWeight: 'bold'
+  }
+});
 
 export default BizInfo;
