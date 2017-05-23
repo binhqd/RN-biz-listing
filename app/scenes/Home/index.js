@@ -68,20 +68,14 @@ class Home extends React.Component {
     const {navigate} = this.props.navigation;
     let menu = <MenuComponent/>
     return (
-      <SideMenu isOpen={ this.state.isOpen } onChange={ this.onSideMenuChange.bind(this) } menu={ menu }>
-        <View style={ {
-                        flex: 1,
-                        flexDirection: 'column'
-                      } }>
-          <View>
-            <SearchBar placeholder='Type Here...' />
-          </View>
-          <View style={ {
-                          backgroundColor: '#fff'
-                        } }>
-            <ListView contentContainerStyle={ styles.list } dataSource={ this.state.dataSource }
-                renderRow={ (rowData) => <CategoryListItem category={rowData} navigation={this.props.navigation}/> } />
-          </View>
+      <SideMenu isOpen={ this.state.isOpen }
+                onChange={ this.onSideMenuChange.bind(this) }
+                menu={ menu }>
+        <View style={ styles.homeContainer }>
+          <SearchBar placeholder='Type Here...' />
+          <ListView contentContainerStyle={ styles.list }
+                    dataSource={ this.state.dataSource }
+                    renderRow={ (rowData) => <CategoryListItem category={ rowData } navigation={ this.props.navigation } /> } />
         </View>
       </SideMenu>
       );
@@ -89,10 +83,15 @@ class Home extends React.Component {
 }
 
 var styles = StyleSheet.create({
+  homeContainer: {
+    flex: 1,
+    flexDirection: 'column'
+  },
   list: {
     justifyContent: 'center',
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    backgroundColor: '#fff'
   }
 });
 
