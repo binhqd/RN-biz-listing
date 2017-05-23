@@ -72,7 +72,7 @@ class Home extends React.Component {
                 onChange={ this.onSideMenuChange.bind(this) }
                 menu={ menu }>
         <View style={ styles.homeContainer }>
-          <SearchBar placeholder='Type Here...' />
+          <SearchBar placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
           <ListView contentContainerStyle={ styles.list }
                     dataSource={ this.state.dataSource }
                     renderRow={ (rowData) => <CategoryListItem category={ rowData } navigation={ this.props.navigation } /> } />
