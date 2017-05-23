@@ -44,9 +44,6 @@ class Home extends React.Component {
     this.THUMB_URLS = ['http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/shop-icon.png'];
   }
 
-  _pressData = ({}: {[key: number]: boolean})
-
-
   componentWillMount() {
     this.props.navigation.setParams({ handleMenuToggle: this.toggleSideMenu.bind(this) });
   }
@@ -95,11 +92,12 @@ class Home extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    let menu = <MenuComponent/>
     return (
       <SideMenu
             isOpen={this.state.isOpen}
             onChange={this.onSideMenuChange.bind(this)}
-            menu={MenuComponent}>
+            menu={menu}>
           <View style={{
               flex: 1,
               flexDirection: 'column'
