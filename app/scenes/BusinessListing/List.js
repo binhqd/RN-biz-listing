@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, SearchBar } from 'react-native-elements';
-import { StyleSheet, ListView, View } from 'react-native';
+import { StyleSheet, ListView, View, ScrollView } from 'react-native';
 
 import {BizItem} from '../../components/BusinessListing';
 
@@ -72,12 +72,10 @@ class ListBusinesses extends React.Component {
     const {navigate} = this.props.navigation;
     return (
       <View style={ { flex: 1, flexDirection: 'column' } }>
-        <View>
-          <SearchBar placeholder='Tìm kiếm doanh nghiệp...' />
-        </View>
-        <View style={ { backgroundColor: '#fff' } }>
+        <SearchBar placeholder='Tìm kiếm doanh nghiệp...' />
+        <ScrollView style={ { backgroundColor: '#fff' } }>
           <ListView contentContainerStyle={ styles.list } dataSource={ this.state.dataSource } renderRow={ this._renderRow.bind(this) } />
-        </View>
+        </ScrollView>
       </View>
       );
   }
