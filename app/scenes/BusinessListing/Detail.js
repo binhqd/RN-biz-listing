@@ -22,25 +22,41 @@ class BusinessDetail extends React.Component {
   };
 
   constructor() {
-    super()
-
-    let dumpBiz = {
-      id: 1,
-      name: "Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 Biz 1 ",
-      description: "This is a business. This is a business. This is a business. This is a business. This is a business. ",
-      image: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/shop-icon.png',
-      address: '35 Nguyen Tat Thanh, Q. Thanh Khe, TP. Đà Nẵng',
-      phone: '0236 454432',
-      fax: '0236 454433',
-      website: 'http://theircompany.com'
-    };
+    super();
+    let imgSources = require('../../dump/logos');
 
     this.state = {
-      biz: dumpBiz
+      images: imgSources
     };
   }
 
+  componentWillMount() {
+    const { params } = this.props.navigation.state;
+    let biz = null;
+
+    let dumpBizs = require('../../dump/dumpbiz');
+    for (let i = 0; i < dumpBizs.length; i++) {
+      if (dumpBizs[i].id == params.businessId) {
+        biz = dumpBizs[i];
+      }
+    }
+
+    this.setState({
+      biz: {
+        ...biz,
+        address: '35 Nguyen Tat Thanh, Q. Thanh Khe, TP. Đà Nẵng',
+        phone: '0236 454432',
+        fax: '0236 454433',
+        website: 'http://theircompany.com',
+        lat: 45,
+        lng: 45
+      }
+    })
+  }
+
   render() {
+    let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
+
     const {navigate} = this.props.navigation;
     return (
         <ScrollView>
@@ -52,7 +68,7 @@ class BusinessDetail extends React.Component {
         </View>
         <View style={ styles.row }>
           <View>
-            <Image style={ styles.thumb } source={ { uri: this.state.biz.image } } />
+            <Image style={ styles.thumb } source={ imgSource } />
           </View>
           <View style={ { flex: 1, marginLeft: 5 } }>
             <Text style={ styles.description }>

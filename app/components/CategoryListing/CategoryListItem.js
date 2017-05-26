@@ -10,9 +10,8 @@ class CategoryListItem extends React.Component {
   }
 
   render() {
-
     return (
-      <TouchableHighlight onPress={ () => this._pressRow(1) } underlayColor='rgba(0,0,0,0)'>
+      <TouchableHighlight onPress={ () => this._pressRow(this.props.category.id) } underlayColor='rgba(0,0,0,0)'>
         <View>
           <View style={ styles.row }>
             <Image style={ styles.thumb } source={ this.props.image } />
