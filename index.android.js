@@ -15,11 +15,13 @@ import { StackNavigator } from 'react-navigation';
 import HomeScreen from './app/scenes/Home/index';
 import ListBusiness from './app/scenes/BusinessListing/List';
 import BusinessDetail from './app/scenes/BusinessListing/Detail';
+import About from './app/scenes/About';
 
 const bizlisting = StackNavigator({
   Home: { screen: HomeScreen },
   ListBusinesses: { screen: ListBusiness },
-  BizDetail: { screen: BusinessDetail }
+  BizDetail: { screen: BusinessDetail },
+  About: { screen: About }
 }, {
   initialRouterName: 'Home'
 });
