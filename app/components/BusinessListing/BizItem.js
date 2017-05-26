@@ -15,7 +15,7 @@ class BizItem extends React.Component {
   render() {
     return (
       <TouchableHighlight underlayColor='rgba(0,0,0,0)'
-        onPress={ () => this.props.navigation.navigate('BizDetail', { businessId: 'Lucy' }) }>
+        onPress={ () => this.props.navigation.navigate('BizDetail', { businessId: this.props.biz.id }) }>
         <View style={ styles.row }>
           <View>
             <Image style={ styles.thumb } source={ this.props.image } />
