@@ -33,29 +33,7 @@ class Home extends React.Component {
 
     let dump = require('../../dump/dumpCategories');
 
-    let imgSources = [];
-
-    imgSources.push(require('../../dump/logos/1.png'));
-    imgSources.push(require('../../dump/logos/2.png'));
-    imgSources.push(require('../../dump/logos/3.png'));
-    imgSources.push(require('../../dump/logos/4.png'));
-    imgSources.push(require('../../dump/logos/5.png'));
-    imgSources.push(require('../../dump/logos/6.png'));
-    imgSources.push(require('../../dump/logos/7.png'));
-    imgSources.push(require('../../dump/logos/8.png'));
-    imgSources.push(require('../../dump/logos/9.png'));
-    imgSources.push(require('../../dump/logos/10.png'));
-    imgSources.push(require('../../dump/logos/11.png'));
-    imgSources.push(require('../../dump/logos/12.png'));
-    imgSources.push(require('../../dump/logos/13.png'));
-    imgSources.push(require('../../dump/logos/14.png'));
-    imgSources.push(require('../../dump/logos/15.png'));
-    imgSources.push(require('../../dump/logos/16.png'));
-    imgSources.push(require('../../dump/logos/17.png'));
-    imgSources.push(require('../../dump/logos/18.png'));
-    imgSources.push(require('../../dump/logos/19.png'));
-    imgSources.push(require('../../dump/logos/20.png'));
-    imgSources.push(require('../../dump/logos/21.png'));
+    let imgSources = require('../../dump/logos');
 
     this.state = {
       dataSource: ds.cloneWithRows(dump.categories),
