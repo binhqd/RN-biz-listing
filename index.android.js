@@ -11,19 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import HomeScreen from './app/scenes/Home/index';
-import ListBusiness from './app/scenes/BusinessListing/List';
-import BusinessDetail from './app/scenes/BusinessListing/Detail';
-import About from './app/scenes/About';
 
-const bizlisting = StackNavigator({
-  Home: { screen: HomeScreen },
-  ListBusinesses: { screen: ListBusiness },
-  BizDetail: { screen: BusinessDetail },
-  About: { screen: About }
-}, {
-  initialRouterName: 'Home'
-});
+import App from './app/components/App';
 
-AppRegistry.registerComponent('bizlisting', () => bizlisting);
+AppRegistry.registerComponent('bizlisting', () => App);
