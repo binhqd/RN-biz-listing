@@ -21,7 +21,7 @@ class Home extends React.Component {
             }}
             onPress={ () => state.params.handleMenuToggle() } />
 
-      ),
+      )
     };
   };
 
