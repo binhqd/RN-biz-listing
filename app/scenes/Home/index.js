@@ -12,10 +12,13 @@ class Home extends React.Component {
     return {
       title: 'Doanh Nghiệp TP Đà Nẵng',
       headerRight: (
-      <Icon raised
+      <Icon
             name='bars'
             type='font-awesome'
             color='#000'
+            iconStyle={{
+              marginRight: 20
+            }}
             onPress={ () => state.params.handleMenuToggle() } />
 
       ),
