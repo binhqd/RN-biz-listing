@@ -1,18 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Image, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import {connect} from 'react-redux';
 
 class MenuComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    let dump = require('../../dump/dumpCategories');
-
-
     let imgSources = require('../../dump/logos');
 
     this.state = {
-      menuItems: dump.categories,
       images: imgSources
     }
   }
@@ -37,7 +34,7 @@ class MenuComponent extends React.Component {
         <List containerStyle={ styles.menuContainer }>
           <ListItem  onPress={ this.gotoAbout.bind(this) } title='Giới thiệu' />
           <ListItem  onPress={ () => this._pressRow(1) } title='Tin khuyến mãi' />
-          { this.state.menuItems.map((l, i) => {
+          { this.props.categories.map((l, i) => {
               let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
               return (
                 <ListItem  roundAvatar avatar={ imgSource } onPress={ () => this._pressRow(1) } key={ i } title={ l.name } />
@@ -65,4 +62,14 @@ let styles = StyleSheet.create({
   }
 });
 
-export default MenuComponent;
+MenuComponent.defaultProps = {
+  categories: []
+}
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories
+  }
+}
+
+export default connect(mapStateToProps)(MenuComponent);

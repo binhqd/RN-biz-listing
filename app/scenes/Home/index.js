@@ -34,9 +34,12 @@ class Home extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-//    let dump = require('../../dump/dumpCategories');
     this.props.dispatch(Categories.actions.list()).then(response => {
-        console.log(response);
+        this.props.dispatch({
+          type: 'CATEGORIES_RECEIVED',
+          categories: response.data
+        });
+
         this.setState({
           dataSource: ds.cloneWithRows(response.data)
         });
