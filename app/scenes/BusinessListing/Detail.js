@@ -2,22 +2,21 @@ import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar, Button } from 'react-native-elements';
 import { StyleSheet, Text, View, ListView, Image, ScrollView } from 'react-native';
 import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
+import { LayoutWithSideBar } from '../../components/layouts';
 
 class BusinessDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
     const {state, setParams} = navigation;
     return {
       title: 'Doanh Nghiệp TP Đà Nẵng',
-    //      headerRight: (
-    //        <Icon
-    //          raised
-    //          name='bars'
-    //          type='font-awesome'
-    //          color='#000'
-    //          onPress={() => state.params.handleMenuToggle()}
-    //        />
-    //
-    //      ),
+      headerRight: (
+      <Icon raised
+            name='bars'
+            type='font-awesome'
+            color='#000'
+            onPress={ () => state.params.handleMenuToggle() } />
+
+      )
     };
   };
 
@@ -31,7 +30,7 @@ class BusinessDetail extends React.Component {
   }
 
   componentWillMount() {
-    const { params } = this.props.navigation.state;
+    const {params} = this.props.navigation.state;
     let biz = null;
 
     let dumpBizs = require('../../dump/dumpbiz');
@@ -55,38 +54,51 @@ class BusinessDetail extends React.Component {
   }
 
   render() {
-    let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
+    let imgSource = this.state.images[Math.floor(Math.random() * this.state.images.length)];
 
     const {navigate} = this.props.navigation;
     return (
+      <LayoutWithSideBar navigation={ this.props.navigation }>
         <ScrollView>
-      <View style={ { flex: 1, flexDirection: 'column', backgroundColor: '#fff', padding: 20 } }>
-        <View>
-          <Text style={styles.bizTitle}>
-            { this.state.biz.name }
-          </Text>
-        </View>
-        <View style={ styles.row }>
-          <View>
-            <Image style={ styles.thumb } source={ imgSource } />
+          <View style={ {
+                          flex: 1,
+                          flexDirection: 'column',
+                          backgroundColor: '#fff',
+                          padding: 20
+                        } }>
+            <View>
+              <Text style={ styles.bizTitle }>
+                { this.state.biz.name }
+              </Text>
+            </View>
+            <View style={ styles.row }>
+              <View>
+                <Image style={ styles.thumb } source={ imgSource } />
+              </View>
+              <View style={ {
+                              flex: 1,
+                              marginLeft: 5
+                            } }>
+                <Text style={ styles.description }>
+                  { this.state.biz.description }
+                </Text>
+              </View>
+            </View>
+            <BizGMap lat={ 45 } lng={ 35 } />
+            <BizImageList/>
+            <BizInfo biz={ this.state.biz } />
+            <View style={ styles.panelButtons }>
+              <Button buttonStyle={ styles.btnAction }
+                      raised
+                      icon={ {
+                               name: 'globe',
+                               type: 'font-awesome'
+                             } }
+                      title='Website' />
+            </View>
           </View>
-          <View style={ { flex: 1, marginLeft: 5 } }>
-            <Text style={ styles.description }>
-              { this.state.biz.description }
-            </Text>
-          </View>
-        </View>
-        <BizGMap lat={45} lng={35}/>
-        <BizImageList/>
-        <BizInfo biz={this.state.biz}/>
-        <View style={ styles.panelButtons }>
-            <Button buttonStyle={ styles.btnAction }
-              raised
-              icon={{name: 'globe', type: 'font-awesome'}}
-              title='Website' />
-        </View>
-      </View>
-      </ScrollView>
+        </ScrollView>
+      </LayoutWithSideBar>
       );
   }
 }

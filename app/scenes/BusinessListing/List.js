@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { Icon, SearchBar } from 'react-native-elements';
 import { StyleSheet, ListView, View, ScrollView } from 'react-native';
-
-import {BizItem} from '../../components/BusinessListing';
+import { LayoutWithSideBar } from '../../components/layouts';
+import { BizItem } from '../../components/BusinessListing';
 
 class ListBusinesses extends React.Component {
   static navigationOptions = ({navigation}) => {
     const {state, setParams} = navigation;
     return {
       title: 'Doanh Nghiệp TP Đà Nẵng',
-    //      headerRight: (
-    //        <Icon
-    //          raised
-    //          name='bars'
-    //          type='font-awesome'
-    //          color='#000'
-    //          onPress={() => state.params.handleMenuToggle()}
-    //        />
-    //
-    //      ),
+      headerRight: (
+      <Icon raised
+            name='bars'
+            type='font-awesome'
+            color='#000'
+            onPress={ () => state.params.handleMenuToggle() } />
+
+      )
     };
   };
 
@@ -39,22 +37,33 @@ class ListBusinesses extends React.Component {
   }
 
   _renderRow(rowData: object, sectionID: number, rowID: number) {
-    let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
+    let imgSource = this.state.images[Math.floor(Math.random() * this.state.images.length)];
 
     return (
-      <BizItem navigation={ this.props.navigation } biz={ rowData } image={imgSource}/>
+      <BizItem navigation={ this.props.navigation }
+               biz={ rowData }
+               image={ imgSource } />
       );
   }
 
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View style={ { flex: 1, flexDirection: 'column' } }>
-        <SearchBar placeholder='Tìm kiếm doanh nghiệp...' />
-        <ScrollView style={ { backgroundColor: '#fff' } }>
-          <ListView contentContainerStyle={ styles.list } dataSource={ this.state.dataSource } renderRow={ this._renderRow.bind(this) } />
-        </ScrollView>
-      </View>
+      <LayoutWithSideBar navigation={ this.props.navigation }>
+        <View style={ {
+                        flex: 1,
+                        flexDirection: 'column'
+                      } }>
+          <SearchBar placeholder='Tìm kiếm doanh nghiệp...' />
+          <ScrollView style={ {
+                                backgroundColor: '#fff'
+                              } }>
+            <ListView contentContainerStyle={ styles.list }
+                      dataSource={ this.state.dataSource }
+                      renderRow={ this._renderRow.bind(this) } />
+          </ScrollView>
+        </View>
+      </LayoutWithSideBar>
       );
   }
 }
