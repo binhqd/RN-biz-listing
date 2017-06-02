@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
+import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
 import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
-import { MenuComponent } from '../../components/SideMenu';
 import { CategoryListItem } from '../../components/CategoryListing';
+import {LayoutWithSideBar} from '../../components/layouts';
 import { connect } from 'react-redux';
 import {Categories} from '../../api';
 
@@ -25,11 +25,6 @@ class Home extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      isOpen: false
-    }
-    this.toggleSideMenu = this.toggleSideMenu.bind(this);
-
     var ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
@@ -46,41 +41,16 @@ class Home extends React.Component {
     });
 
     let imgSources = require('../../dump/logos');
-    //this.props.dispatch();
-
     this.state = {
-//      dataSource: ds.cloneWithRows(dump.categories),
       dataSource: ds.cloneWithRows([]),
       images: imgSources
     };
 
   }
 
-  componentWillMount() {
-    this.props.navigation.setParams({
-      handleMenuToggle: this.toggleSideMenu.bind(this)
-    });
-  }
-
-  onSideMenuChange(isOpen: boolean) {
-    this.setState({
-      isOpen: isOpen
-    })
-  }
-
-  toggleSideMenu() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
-
   render() {
-    const {navigate} = this.props.navigation;
-    let menu = <MenuComponent navigation={this.props.navigation}/>
     return (
-      <SideMenu isOpen={ this.state.isOpen }
-                onChange={ this.onSideMenuChange.bind(this) }
-                menu={ menu }>
+      <LayoutWithSideBar navigation={this.props.navigation}>
         <View style={ styles.homeContainer }>
           <SearchBar placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
           <ListView contentContainerStyle={ styles.list }
@@ -90,8 +60,8 @@ class Home extends React.Component {
                       return <CategoryListItem category={ rowData } image={imgSource} navigation={ this.props.navigation } />
                     }} />
         </View>
-      </SideMenu>
-      );
+      </LayoutWithSideBar>
+    );
   }
 }
 
