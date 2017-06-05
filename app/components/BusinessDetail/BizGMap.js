@@ -8,10 +8,10 @@ class BizGMap extends React.Component {
       return (
         <View style={ styles.mapContainer }>
           <MapView style={ styles.map } region={ {
-                                                   latitude: this.props.lat,
-                                                   longitude: this.props.lng,
-                                                   latitudeDelta: 0,
-                                                   longitudeDelta: 0
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
                                                  } } />
         </View>
         );
@@ -24,13 +24,12 @@ class BizGMap extends React.Component {
 var styles = StyleSheet.create({
   mapContainer: {
     height: 300,
-    width: 400,
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 10
   },
   map: {
-
+    ...StyleSheet.absoluteFillObject,
   }
 });
 
