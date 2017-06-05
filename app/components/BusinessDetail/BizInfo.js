@@ -11,7 +11,7 @@ class BizInfo extends React.Component {
   }
   render() {
     return (
-      <View>
+      <View style={ styles.container }>
         <Text style={ styles.infoTitle }>
           Thông tin:
         </Text>
@@ -28,6 +28,10 @@ class BizInfo extends React.Component {
 let styles = StyleSheet.create({
   infoTitle: {
     fontWeight: 'bold'
+  },
+  container: {
+    flex: 1,
+    marginTop: 10
   }
 });
 

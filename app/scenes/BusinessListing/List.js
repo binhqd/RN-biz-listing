@@ -62,6 +62,7 @@ class ListBusinesses extends React.Component {
                                 backgroundColor: '#fff'
                               } }>
             <ListView contentContainerStyle={ styles.list }
+                      enableEmptySections
                       dataSource={ this.state.dataSource }
                       renderRow={ this._renderRow.bind(this) } />
           </ScrollView>

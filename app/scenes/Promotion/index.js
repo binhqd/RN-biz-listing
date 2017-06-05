@@ -93,6 +93,7 @@ class Home extends React.Component {
           <SearchBar placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
           <ListView contentContainerStyle={ styles.list }
                     dataSource={ this.state.dataSource }
+                    enableEmptySections
                     renderRow={ (rowData) => {
                       let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
                       return <CategoryListItem category={ rowData } image={imgSource} navigation={ this.props.navigation } />
