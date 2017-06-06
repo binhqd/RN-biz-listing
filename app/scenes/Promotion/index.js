@@ -1,113 +1,142 @@
 import React, { Component } from 'react';
-import { SideMenu, List, ListItem, Icon, SearchBar } from 'react-native-elements';
+import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
 import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
-import { MenuComponent } from '../../components/SideMenu';
-import { CategoryListItem } from '../../components/CategoryListing';
+import { PromotionListItem } from '../../components/Promotion';
+import { LayoutWithSideBar } from '../../components/layouts';
+import { connect } from 'react-redux';
+import { Categories } from '../../api';
 
-class Home extends React.Component {
+class Promotion extends React.Component {
   static navigationOptions = ({navigation}) => {
     const {state, setParams} = navigation;
     return {
-      title: 'Doanh Nghiệp TP Đà Nẵng',
+      title: 'Tin Khuyến Mãi',
       headerRight: (
-      <Icon raised
+      <Icon
             name='bars'
             type='font-awesome'
             color='#000'
+            iconStyle={{
+              marginRight: 20
+            }}
             onPress={ () => state.params.handleMenuToggle() } />
 
-      ),
+      )
     };
   };
 
-  constructor() {
-    super()
-    this.state = {
-      isOpen: false
-    }
-    this.toggleSideMenu = this.toggleSideMenu.bind(this);
+  constructor(props, context) {
+    super(props, context);
 
-    var ds = new ListView.DataSource({
+    this.ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    let dump = require('../../dump/dumpCategories');
-
-    let imgSources = [];
-
-    imgSources.push(require('../../dump/logos/1.png'));
-    imgSources.push(require('../../dump/logos/2.png'));
-    imgSources.push(require('../../dump/logos/3.png'));
-    imgSources.push(require('../../dump/logos/4.png'));
-    imgSources.push(require('../../dump/logos/5.png'));
-    imgSources.push(require('../../dump/logos/6.png'));
-    imgSources.push(require('../../dump/logos/7.png'));
-    imgSources.push(require('../../dump/logos/8.png'));
-    imgSources.push(require('../../dump/logos/9.png'));
-    imgSources.push(require('../../dump/logos/10.png'));
-    imgSources.push(require('../../dump/logos/11.png'));
-    imgSources.push(require('../../dump/logos/12.png'));
-    imgSources.push(require('../../dump/logos/13.png'));
-    imgSources.push(require('../../dump/logos/14.png'));
-    imgSources.push(require('../../dump/logos/15.png'));
-    imgSources.push(require('../../dump/logos/16.png'));
-    imgSources.push(require('../../dump/logos/17.png'));
-    imgSources.push(require('../../dump/logos/18.png'));
-    imgSources.push(require('../../dump/logos/19.png'));
-    imgSources.push(require('../../dump/logos/20.png'));
-    imgSources.push(require('../../dump/logos/21.png'));
-
     this.state = {
-      dataSource: ds.cloneWithRows(dump.categories),
-      images: imgSources
+      dataSource: this.ds.cloneWithRows([])
     };
-
   }
 
-  componentWillMount() {
-    this.props.navigation.setParams({
-      handleMenuToggle: this.toggleSideMenu.bind(this)
+  componentDidMount() {
+    // this.props.dispatch(Categories.actions.list()).then(response => {
+    //   this.props.dispatch({
+    //     type: 'CATEGORIES_RECEIVED',
+    //     categories: response.data
+    //   });
+    //
+    //   this.setState({
+    //     dataSource: this.ds.cloneWithRows(response.data),
+    //     originalData: response.data
+    //   });
+    // });
+
+    this.setState({
+      dataSource: this.ds.cloneWithRows([
+        {
+          title: 'test',
+          description: 'some description some description some description some description some description some description some description some description some description some description some description some description some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },{
+          title: 'test',
+          description: 'some description',
+          date: '2017-06-15'
+        },
+      ]),
+      originalData: []
     });
   }
 
-  onSideMenuChange(isOpen: boolean) {
-    this.setState({
-      isOpen: isOpen
-    })
-  }
-
-  toggleSideMenu() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
-
   render() {
-    const {navigate} = this.props.navigation;
-    let menu = <MenuComponent navigation={this.props.navigation}/>
     return (
-      <SideMenu isOpen={ this.state.isOpen }
-                onChange={ this.onSideMenuChange.bind(this) }
-                menu={ menu }>
-        <View style={ styles.homeContainer }>
-          <SearchBar placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
-          <ListView contentContainerStyle={ styles.list }
-                    dataSource={ this.state.dataSource }
-                    enableEmptySections
-                    renderRow={ (rowData) => {
-                      let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
-                      return <CategoryListItem category={ rowData } image={imgSource} navigation={ this.props.navigation } />
-                    }} />
+      <LayoutWithSideBar navigation={ this.props.navigation }>
+        <View style={ styles.container }>
+          {
+            this.ds.getRowCount ?
+            (<ListView contentContainerStyle={ styles.list }
+                      dataSource={ this.state.dataSource }
+                      enableEmptySections
+                      renderRow={ (rowData) => {
+                                    let imgSource = require('../../dump/promotion.jpg');
+                                    return <PromotionListItem promotion={ rowData }
+                                                             image={ imgSource }
+                                                             navigation={ this.props.navigation } />
+                                                           } } />)
+            :
+            (<View>
+              <Text>Không tìm thấy kết quả</Text>
+            </View>)
+          }
         </View>
-      </SideMenu>
-      );
+      </LayoutWithSideBar>
+    );
   }
 }
 
 var styles = StyleSheet.create({
-  homeContainer: {
+  container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#fff'
   },
   list: {
     justifyContent: 'center',
@@ -117,4 +146,4 @@ var styles = StyleSheet.create({
   }
 });
 
-export default Home;
+export default Promotion;

@@ -7,12 +7,14 @@ import BusinessDetail from '../../scenes/BusinessListing/Detail';
 import About from '../../scenes/About';
 import { Provider } from 'react-redux';
 import store from '../../store';
+import ListPromotions from '../../scenes/Promotion';
 
 const BizListing = bizlisting = StackNavigator({
   Home: { screen: HomeScreen },
   ListBusinesses: { screen: ListBusiness },
   BizDetail: { screen: BusinessDetail },
-  About: { screen: About }
+  About: { screen: About },
+  ListPromotions: { screen: ListPromotions }
 }, {
   initialRouterName: 'Home'
 });

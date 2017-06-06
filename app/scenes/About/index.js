@@ -39,7 +39,7 @@ class About extends React.Component {
 
     return (
       <LayoutWithSideBar navigation={this.props.navigation}>
-        <View>
+        <View style={ styles.container }>
             <HTMLView
                 value={htmlContent}
                 stylesheet={styles}
@@ -51,6 +51,10 @@ class About extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
   a: {
     fontWeight: '300',
     color: '#FF3366', // make links coloured pink

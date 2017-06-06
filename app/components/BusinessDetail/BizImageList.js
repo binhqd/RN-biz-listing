@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
+import Dimensions from 'Dimensions'
+let width = Dimensions.get('window').width;
 
 class BizImageList extends React.Component {
   constructor(props, context) {
@@ -41,7 +43,8 @@ class BizImageList extends React.Component {
 
   render() {
     return (
-      <Swiper style={styles.wrapper} showsPagination={false} height={75}>
+      <View style={ styles.container}>
+      <Swiper style={styles.wrapper} showsPagination={false}>
       {
         this.state.groups.map((group, index) => {
           return (
@@ -56,23 +59,29 @@ class BizImageList extends React.Component {
         })
       }
       </Swiper>
+      </View>
     )
   }
 }
 
 let styles = {
-  wrapper: {
+  container: {
     flex: 1,
+    backgroundColor: '#ddd',
     height: 75,
-    alignSelf: 'stretch'
+    flexDirection: 'column'
+  },
+  wrapper: {
+    flex: 1
   },
   slide: {
     flex: 1,
+    width: width,
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
   bizThumbnail: {
-    width: 100,
+    flex: 0.28,
     height: 75
   }
 }

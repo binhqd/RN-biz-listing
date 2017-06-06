@@ -12,13 +12,11 @@ class CategoryListItem extends React.Component {
   render() {
     return (
       <TouchableHighlight onPress={ () => this._pressRow(this.props.category.id) } underlayColor='rgba(0,0,0,0)'>
-        <View>
-          <View style={ styles.row }>
-            <Image style={ styles.thumb } source={ this.props.image } />
-            <Text style={ styles.text }>
-              { this.props.category.name }
-            </Text>
-          </View>
+        <View style={ styles.row }>
+          <Image style={ styles.thumb } source={ this.props.image } />
+          <Text style={ styles.text }>
+            { this.props.category.name }
+          </Text>
         </View>
       </TouchableHighlight>
       );

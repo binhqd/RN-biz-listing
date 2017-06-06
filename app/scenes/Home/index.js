@@ -31,6 +31,17 @@ class Home extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
+
+
+    let imgSources = require('../../dump/logos');
+    this.state = {
+      dataSource: this.ds.cloneWithRows([]),
+      images: imgSources
+    };
+
+  }
+
+  componentDidMount() {
     this.props.dispatch(Categories.actions.list()).then(response => {
       this.props.dispatch({
         type: 'CATEGORIES_RECEIVED',
@@ -42,13 +53,6 @@ class Home extends React.Component {
         originalData: response.data
       });
     });
-
-    let imgSources = require('../../dump/logos');
-    this.state = {
-      dataSource: this.ds.cloneWithRows([]),
-      images: imgSources
-    };
-
   }
 
   filterCategories(searchTerm) {

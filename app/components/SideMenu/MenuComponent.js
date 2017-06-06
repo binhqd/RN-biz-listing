@@ -21,7 +21,11 @@ class MenuComponent extends React.Component {
   }
 
   gotoAbout() {
-    this.props.navigation.navigate('About')
+    this.props.navigation.navigate('About');
+  }
+
+  listPromotions() {
+    this.props.navigation.navigate('ListPromotions');
   }
 
   render() {
@@ -33,7 +37,7 @@ class MenuComponent extends React.Component {
         <ScrollView>
         <List containerStyle={ styles.menuContainer }>
           <ListItem  onPress={ this.gotoAbout.bind(this) } title='Giới thiệu' />
-          <ListItem  onPress={ () => this._pressRow(1) } title='Tin khuyến mãi' />
+          <ListItem  onPress={ this.listPromotions.bind(this) } title='Tin khuyến mãi' />
           { this.props.categories.map((l, i) => {
               let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
               return (
