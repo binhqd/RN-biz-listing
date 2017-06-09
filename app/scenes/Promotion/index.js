@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
-import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image, Picker, ScrollView } from 'react-native';
 import { PromotionListItem } from '../../components/Promotion';
 import { LayoutWithSideBar } from '../../components/layouts';
 import { connect } from 'react-redux';
@@ -33,7 +33,8 @@ class Promotion extends React.Component {
     });
 
     this.state = {
-      dataSource: this.ds.cloneWithRows([])
+      dataSource: this.ds.cloneWithRows([]),
+      selectedCategoryId: ''
     };
   }
 
@@ -106,10 +107,30 @@ class Promotion extends React.Component {
     });
   }
 
+  onFilterChange(itemValue, itemIndex) {
+    this.setState({
+      selectedCategoryId: itemValue
+    })
+  }
+
   render() {
     return (
       <LayoutWithSideBar navigation={ this.props.navigation }>
         <View style={ styles.container }>
+          <Picker
+            selectedValue={this.state.selectedCategoryId}
+            onValueChange={this.onFilterChange.bind(this)}
+            >
+            <Picker.Item label={'Tất cả ngành nghề'} value={''}></Picker.Item>
+            {
+              this.props.categories.map(category => {
+                return (
+                  <Picker.Item key={category.id} label={category.name} value={category.id}></Picker.Item>
+                )
+              })
+            }
+          </Picker>
+          <ScrollView>
           {
             this.ds.getRowCount ?
             (<ListView contentContainerStyle={ styles.list }
@@ -126,6 +147,7 @@ class Promotion extends React.Component {
               <Text>Không tìm thấy kết quả</Text>
             </View>)
           }
+          </ScrollView>
         </View>
       </LayoutWithSideBar>
     );
@@ -138,6 +160,9 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff'
   },
+  listPromotions: {
+    flex: 1
+  },
   list: {
     justifyContent: 'center',
     flexDirection: 'row',
@@ -146,4 +171,10 @@ var styles = StyleSheet.create({
   }
 });
 
-export default Promotion;
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories
+  }
+}
+
+export default connect(mapStateToProps)(Promotion);
