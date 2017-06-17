@@ -26,7 +26,6 @@ class BizImageList extends React.Component {
   }
 
   grouping(items, n) {
-    console.log(items.length);
     let groups = [];
 
     while (items.length > 0) {

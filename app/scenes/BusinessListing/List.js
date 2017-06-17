@@ -3,6 +3,7 @@ import { Icon, SearchBar } from 'react-native-elements';
 import { StyleSheet, ListView, View, ScrollView } from 'react-native';
 import { LayoutWithSideBar } from '../../components/layouts';
 import { BizItem } from '../../components/BusinessListing';
+import { Businesses } from '../../api';
 
 class ListBusinesses extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -23,8 +24,8 @@ class ListBusinesses extends React.Component {
     };
   };
 
-  constructor() {
-    super()
+  constructor(props, context) {
+    super(props, context)
     var ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
@@ -34,9 +35,26 @@ class ListBusinesses extends React.Component {
     let imgSources = require('../../dump/logos');
 
     this.state = {
-      dataSource: ds.cloneWithRows(dumpBiz),
+      ds,
+      dataSource: ds.cloneWithRows([]),
       images: imgSources
     };
+  }
+
+  componentDidMount() {
+    const {params} = this.props.navigation.state;
+
+    let requestParams = {
+      catID: params.id
+    }
+    
+    Businesses.actions.filterByCat.request(requestParams).then(response => {
+      this.setState({
+        dataSource: this.state.ds.cloneWithRows(response)
+      })
+    }).catch(err => {
+      console.log(err)
+    });
   }
 
   _renderRow(rowData: object, sectionID: number, rowID: number) {

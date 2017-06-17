@@ -8,15 +8,12 @@ class CategoryListItem extends React.Component {
 
   }
   _pressRow(rowID: number) {
-    this.props.navigation.navigate('ListBusinesses', {
-      categoryId: 'Lucy'
-    })
+    this.props.navigation.navigate('ListBusinesses', this.props.category)
   }
 
   render() {
     let img = this.props.image;
     if (this.props.category.logo) {
-      console.log(`${CONFIG.STATIC_URL}/category-logos/${this.props.category.logo}`);
       img = {uri:`${CONFIG.STATIC_URL}/category-logos/${this.props.category.logo}`};
     }
 

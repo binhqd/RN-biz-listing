@@ -1,4 +1,4 @@
 import Categories from './categories';
-//import Businesses from './businesses';
+import Businesses from './businesses';
 
-export {Categories/*, Businesses*/};
+export {Categories, Businesses};

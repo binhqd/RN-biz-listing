@@ -1,4 +1,6 @@
 import React from 'react';
+import CONFIG from '../../constants';
+
 import {
   StyleSheet,
   Text,
@@ -13,12 +15,17 @@ class BizItem extends React.Component {
   }
 
   render() {
+    let img = this.props.image;
+    if (this.props.biz.logo) {
+      img = {uri:`${CONFIG.STATIC_URL}/biz-logos/${this.props.biz.logo}`};
+    }
+
     return (
       <TouchableHighlight underlayColor='rgba(0,0,0,0)'
         onPress={ () => this.props.navigation.navigate('BizDetail', { businessId: this.props.biz.id }) }>
         <View style={ styles.row }>
           <View>
-            <Image style={ styles.thumb } source={ this.props.image } />
+            <Image style={ styles.thumb } source={ img } />
           </View>
           <View style={ { flex: 1, flexDirection: 'column', marginLeft: 5 } }>
             <Text style={ styles.text }>
