@@ -1,8 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
+import CONFIG from '../../constants';
 
 class CategoryListItem extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
+  }
   _pressRow(rowID: number) {
     this.props.navigation.navigate('ListBusinesses', {
       categoryId: 'Lucy'
@@ -10,10 +14,16 @@ class CategoryListItem extends React.Component {
   }
 
   render() {
+    let img = this.props.image;
+    if (this.props.category.logo) {
+      console.log(`${CONFIG.STATIC_URL}/category-logos/${this.props.category.logo}`);
+      img = {uri:`${CONFIG.STATIC_URL}/category-logos/${this.props.category.logo}`};
+    }
+
     return (
       <TouchableHighlight onPress={ () => this._pressRow(this.props.category.id) } underlayColor='rgba(0,0,0,0)'>
         <View style={ styles.row }>
-          <Image style={ styles.thumb } source={ this.props.image } />
+          <Image style={ styles.thumb } source={ img } />
           <Text style={ styles.text }>
             { this.props.category.name }
           </Text>

@@ -29,12 +29,13 @@ class MenuComponent extends React.Component {
   }
 
   render() {
+    let logo = require('../../assets/images/app-logo.png');
     return (
       <View style={ styles.sideMenu }>
         <View style={ styles.header }>
-          <Text>This is Menu!</Text>
+          <Image style={ styles.appLogo } source={ logo } />
         </View>
-        <ScrollView>
+        <ScrollView style={ styles.scrollContainer }>
         <List containerStyle={ styles.menuContainer }>
           <ListItem  onPress={ this.gotoAbout.bind(this) } title='Giới thiệu' />
           <ListItem  onPress={ this.listPromotions.bind(this) } title='Tin khuyến mãi' />
@@ -58,11 +59,32 @@ let styles = StyleSheet.create({
     flexDirection: 'column'
   },
   header: {
+    display:'flex',
+    backgroundColor: '#fff',
+    flexDirection: 'column',
+    alignItems: 'center',
     height: 100,
-    backgroundColor: '#0000ff'
+    position: 'relative'
+  },
+  appLogo: {
+    display:'flex',
+    height: 90,
+    width: null,
+    position: 'absolute',
+    top: 5,
+    bottom: 5,
+    left: 5,
+    right: 5
+
   },
   menuContainer: {
-    marginBottom: 20
+    marginTop: 0,
+    marginBottom: 20,
+    backgroundColor: '#fff'
+  },
+  scrollContainer : {
+    backgroundColor: '#fff',
+    padding: 0
   }
 });
 

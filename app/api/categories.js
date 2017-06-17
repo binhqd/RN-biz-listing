@@ -1,5 +1,6 @@
 import reduxApi, {transformers} from 'redux-api';
 import adapterFetch from 'redux-api/lib/adapters/fetch';
+import CONFIG from '../constants';
 
 // Example
 const rest = reduxApi({
@@ -30,35 +31,9 @@ const rest = reduxApi({
         });
       }
     ]
-  },
-  add: {
-    url: 'categories/customCreate',
-    options: {
-      method: "POST"
-    }
-  },
-  update: {
-    url: 'categories/:id',
-    options: {
-      method: "PATCH",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }
-  },
-  delete: {
-    url: 'categories/:id',
-    options: {
-      method: "DELETE",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }
   }
 }).use('fetch', adapterFetch(fetch));
 
-rest.use("rootUrl", "http://192.168.100.104:3000/api/");
+rest.use("rootUrl", `${CONFIG.API_URL}/`);
 
 export default rest;
