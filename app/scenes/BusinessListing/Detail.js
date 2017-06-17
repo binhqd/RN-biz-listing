@@ -3,6 +3,7 @@ import { SideMenu, List, ListItem, Icon, SearchBar, Button } from 'react-native-
 import { StyleSheet, Text, View, ListView, Image, ScrollView } from 'react-native';
 import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
 import { LayoutWithSideBar } from '../../components/layouts';
+import CONFIG from '../../constants';
 
 class BusinessDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -23,41 +24,31 @@ class BusinessDetail extends React.Component {
     };
   };
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     let imgSources = require('../../dump/logos');
 
+    const {params} = this.props.navigation.state;
+
     this.state = {
+      biz: {
+        ...params,
+        //address: '35 Nguyen Tat Thanh, Q. Thanh Khe, TP. Đà Nẵng',
+        //phone: '0236 454432',
+        //fax: '0236 454433',
+        //website: 'http://theircompany.com',
+        lat: 45,
+        lng: 45
+      },
       images: imgSources
     };
   }
 
-  componentWillMount() {
-    const {params} = this.props.navigation.state;
-    let biz = null;
-
-    let dumpBizs = require('../../dump/dumpbiz');
-    for (let i = 0; i < dumpBizs.length; i++) {
-      if (dumpBizs[i].id == params.businessId) {
-        biz = dumpBizs[i];
-      }
-    }
-
-    this.setState({
-      biz: {
-        ...biz,
-        address: '35 Nguyen Tat Thanh, Q. Thanh Khe, TP. Đà Nẵng',
-        phone: '0236 454432',
-        fax: '0236 454433',
-        website: 'http://theircompany.com',
-        lat: 45,
-        lng: 45
-      }
-    })
-  }
-
   render() {
     let imgSource = this.state.images[Math.floor(Math.random() * this.state.images.length)];
+    if (this.state.biz.logo) {
+      imgSource = {uri:`${CONFIG.STATIC_URL}/biz-logos/${this.state.biz.logo}`};
+    }
 
     const {navigate} = this.props.navigation;
     return (
