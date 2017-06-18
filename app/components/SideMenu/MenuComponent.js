@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Image, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import {connect} from 'react-redux';
+import CONFIG from '../../constants';
 
 class MenuComponent extends React.Component {
   constructor(props, context) {
@@ -14,10 +15,8 @@ class MenuComponent extends React.Component {
     }
   }
 
-  _pressRow(rowID: number) {
-    this.props.navigation.navigate('ListBusinesses', {
-      categoryId: 'Lucy'
-    });
+  _pressRow(category) {
+    this.props.navigation.navigate('ListBusinesses', category);
   }
 
   gotoAbout() {
@@ -30,6 +29,7 @@ class MenuComponent extends React.Component {
 
   render() {
     let logo = require('../../assets/images/app-logo.png');
+
     return (
       <View style={ styles.sideMenu }>
         <View style={ styles.header }>
@@ -39,10 +39,14 @@ class MenuComponent extends React.Component {
         <List containerStyle={ styles.menuContainer }>
           <ListItem  onPress={ this.gotoAbout.bind(this) } title='Giới thiệu' />
           <ListItem  onPress={ this.listPromotions.bind(this) } title='Tin khuyến mãi' />
-          { this.props.categories.map((l, i) => {
+          { this.props.categories.map((category, i) => {
               let imgSource = this.state.images[Math.floor(Math.random()*this.state.images.length)];
+              if (category.logo) {
+                imgSource = {uri:`${CONFIG.STATIC_URL}/category-logos/${category.logo}`};
+              }
+
               return (
-                <ListItem  roundAvatar avatar={ imgSource } onPress={ () => this._pressRow(1) } key={ i } title={ l.name } />
+                <ListItem  roundAvatar avatar={ imgSource } onPress={ () => this._pressRow(category) } key={ i } title={ category.name } />
               )
             }) }
         </List>
