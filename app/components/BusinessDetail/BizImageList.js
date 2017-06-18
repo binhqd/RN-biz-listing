@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
+import CONFIG from '../../constants';
+
 import Dimensions from 'Dimensions'
 let width = Dimensions.get('window').width;
 
@@ -19,10 +22,9 @@ class BizImageList extends React.Component {
     images.push(require('./2.jpg'));
 
     this.state = {
-      images,
+      images: this.props.images,
       groups: []
     }
-
   }
 
   grouping(items, n) {
@@ -50,7 +52,7 @@ class BizImageList extends React.Component {
             <View style={ styles.slide } key={index}>
               {
                 group.map((item, itemIndex) =>
-                  <Image key={itemIndex} style={ styles.bizThumbnail } source={ item } />
+                  <Image key={itemIndex} style={ styles.bizThumbnail } source={ {uri: `${CONFIG.STATIC_URL}/${item.container}/${item.name}`} } />
                 )
               }
             </View>
@@ -83,6 +85,14 @@ let styles = {
     flex: 0.28,
     height: 75
   }
+}
+
+BizImageList.propTypes = {
+  images: PropTypes.array
+}
+
+BizImageList.defaultProps = {
+  images: []
 }
 
 export default BizImageList;
