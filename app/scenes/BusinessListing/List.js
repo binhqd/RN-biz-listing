@@ -41,13 +41,30 @@ class ListBusinesses extends React.Component {
     };
   }
 
+  searchBusiness(searchTerm) {
+    let params = {
+      catID: this.state.category.id,
+      name: searchTerm
+    }
+
+    Businesses.actions.filterByCat.request(params).then(response => {
+      this.setState({
+        dataSource: this.state.ds.cloneWithRows(response)
+      })
+    });
+  }
+
   componentDidMount() {
     const {params} = this.props.navigation.state;
 
     let requestParams = {
       catID: params.id
     }
-    
+
+    this.setState({
+      category: params
+    })
+
     Businesses.actions.filterByCat.request(requestParams).then(response => {
       this.setState({
         dataSource: this.state.ds.cloneWithRows(response)
@@ -75,7 +92,7 @@ class ListBusinesses extends React.Component {
                         flex: 1,
                         flexDirection: 'column'
                       } }>
-          <SearchBar placeholder='Tìm kiếm doanh nghiệp...' />
+          <SearchBar onChangeText={this.searchBusiness.bind(this)} placeholder='Tìm kiếm doanh nghiệp...' />
           <ScrollView style={ {
                                 backgroundColor: '#fff'
                               } }>
