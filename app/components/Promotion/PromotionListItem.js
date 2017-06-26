@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image } from 'react-native';
-import Dimensions from 'Dimensions'
+import Dimensions from 'Dimensions';
+import CONFIG from '../../constants';
 let width = Dimensions.get('window').width;
 
 // We can use this to make the overlay fill the entire width
@@ -13,10 +15,15 @@ class PromotionListItem extends React.Component {
   }
 
   render() {
+    let img = this.props.image;
+    if (this.props.promotion.banner) {
+      img = {uri:`${CONFIG.STATIC_URL}/${this.props.promotion.banner.container}/${this.props.promotion.banner.name}`};
+    }
+
     return (
       <TouchableHighlight onPress={ () => this._pressRow(this.props.promotion.id) } underlayColor='rgba(0,0,0,0)'>
         <View style={ styles.row }>
-          <Image style={ styles.thumb } source={ this.props.image } />
+          <Image style={ styles.thumb } source={ img } />
 
           <View style={styles.overlay}>
             <Text style={ styles.title }>
@@ -30,6 +37,10 @@ class PromotionListItem extends React.Component {
       </TouchableHighlight>
       );
   }
+}
+
+PromotionListItem.propTypes = {
+  promotion: PropTypes.object
 }
 
 

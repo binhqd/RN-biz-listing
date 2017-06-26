@@ -1,5 +1,6 @@
 import reduxApi, {transformers} from 'redux-api';
-import customFetch from 'api/axios';
+import adapterFetch from 'redux-api/lib/adapters/fetch';
+import CONFIG from '../constants';
 
 const limit = 20;
 
@@ -30,7 +31,7 @@ const rest = reduxApi({
     }
   },
   filterByCat: {
-    url: `promotions?filter[where][category_id][regexp]=^(:catID)&filter[where][name][regexp]=(:name)&filter[limit]=${limit}`,
+    url: `promotions?filter[where][category_id][regexp]=^(:catID)&filter[where][title][regexp]=(:title)&filter[limit]=${limit}`,
     options:(url, params, getState) => {
       return {
         method: "GET",
@@ -75,8 +76,8 @@ const rest = reduxApi({
       }
     }
   }
-})
-.use('fetch', customFetch)
-.use("rootUrl", "http://localhost:3000/api/");
+}).use('fetch', adapterFetch(fetch));
+
+rest.use("rootUrl", `${CONFIG.API_URL}/`);
 
 export default rest;

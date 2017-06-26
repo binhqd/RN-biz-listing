@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button, ListView, TouchableHighlight, Image, Pi
 import { PromotionListItem } from '../../components/Promotion';
 import { LayoutWithSideBar } from '../../components/layouts';
 import { connect } from 'react-redux';
-import { Categories } from '../../api';
+import { Promotions } from '../../api';
 
 class Promotion extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -28,89 +28,50 @@ class Promotion extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.ds = new ListView.DataSource({
+    let ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
     this.state = {
-      dataSource: this.ds.cloneWithRows([]),
+      ds,
+      dataSource: ds.cloneWithRows([]),
       selectedCategoryId: ''
     };
   }
 
   componentDidMount() {
-    // this.props.dispatch(Categories.actions.list()).then(response => {
-    //   this.props.dispatch({
-    //     type: 'CATEGORIES_RECEIVED',
-    //     categories: response.data
-    //   });
-    //
-    //   this.setState({
-    //     dataSource: this.ds.cloneWithRows(response.data),
-    //     originalData: response.data
-    //   });
-    // });
-
-    this.setState({
-      dataSource: this.ds.cloneWithRows([
-        {
-          title: 'test',
-          description: 'some description some description some description some description some description some description some description some description some description some description some description some description some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },{
-          title: 'test',
-          description: 'some description',
-          date: '2017-06-15'
-        },
-      ]),
-      originalData: []
+    Promotions.actions.list.request()
+    .then(response => {
+      this.setState({
+        dataSource: this.state.ds.cloneWithRows(response)
+      })
+    })
+    .catch(err => {
+      console.log(err);
     });
   }
 
   onFilterChange(itemValue, itemIndex) {
     this.setState({
       selectedCategoryId: itemValue
+    });
+
+    let catID = '.*';
+    if (itemValue) {
+      catID = itemValue;
+    }
+
+    console.log(catID);
+
+    Promotions.actions.filterByCat.request({catID: catID, name: ''})
+    .then(response => {
+      this.setState({
+        dataSource: this.state.ds.cloneWithRows(response)
+      })
     })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   render() {
@@ -132,7 +93,7 @@ class Promotion extends React.Component {
           </Picker>
           <ScrollView>
           {
-            this.ds.getRowCount ?
+            this.state.ds.getRowCount ?
             (<ListView contentContainerStyle={ styles.list }
                       dataSource={ this.state.dataSource }
                       enableEmptySections
