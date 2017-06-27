@@ -1,3 +1,3 @@
-import ShowIf from './ShowIf.jsx';
+import ShowIf from './ShowIf.js';
 
 export { ShowIf }
