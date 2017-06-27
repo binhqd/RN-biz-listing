@@ -91,7 +91,7 @@ class Promotion extends React.Component {
               })
             }
           </Picker>
-          <ScrollView>
+          <ScrollView style={{backgroundColor: '#eee'}}>
           {
             this.state.ds.getRowCount ?
             (<ListView contentContainerStyle={ styles.list }
@@ -121,13 +121,9 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff'
   },
-  listPromotions: {
-    flex: 1
-  },
   list: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff'
   }
 });
