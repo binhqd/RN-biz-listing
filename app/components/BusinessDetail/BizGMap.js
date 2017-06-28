@@ -8,11 +8,18 @@ class BizGMap extends React.Component {
       return (
         <View style={ styles.mapContainer }>
           <MapView style={ styles.map } region={ {
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: this.props.lat,
+            longitude: this.props.lng,
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
-                                                 } } />
+          } }>
+          <MapView.Marker
+            coordinate={{
+              latitude: this.props.lat,
+              longitude: this.props.lng,
+            }}
+          />
+        </MapView>
         </View>
         );
     } else {

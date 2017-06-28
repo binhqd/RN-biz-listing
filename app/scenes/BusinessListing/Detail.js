@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { SideMenu, List, ListItem, Icon, SearchBar, Button } from 'react-native-elements';
-import { StyleSheet, Text, View, ListView, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ListView, Image, ScrollView, Linking } from 'react-native';
 import { BizInfo, BizImageList, BizGMap } from '../../components/BusinessDetail';
 import { LayoutWithSideBar } from '../../components/layouts';
 import CONFIG from '../../constants';
+import { ShowIf } from '../../components/utils';
 
 class BusinessDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -78,17 +79,22 @@ class BusinessDetail extends React.Component {
                 </Text>
               </View>
             </View>
-            <BizGMap lat={ 45 } lng={ 35 } />
+            <BizGMap lat={ this.state.biz.geo_lat } lng={ this.state.biz.geo_lng } />
             <BizImageList images={this.state.biz.images}/>
             <BizInfo biz={ this.state.biz } />
             <View style={ styles.panelButtons }>
-              <Button buttonStyle={ styles.btnAction }
-                      raised
-                      icon={ {
-                               name: 'globe',
-                               type: 'font-awesome'
-                             } }
-                      title='Website' />
+              <ShowIf condition={this.state.biz.website}>
+                <Button buttonStyle={ styles.btnAction }
+                        raised
+                        icon={ {
+                                 name: 'globe',
+                                 type: 'font-awesome'
+                               } }
+                        title='Website'
+                        onPress={() => {
+                          Linking.openURL(this.state.biz.website);
+                        }}/>
+                </ShowIf>
             </View>
           </View>
         </ScrollView>
