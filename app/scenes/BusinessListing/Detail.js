@@ -83,7 +83,7 @@ class BusinessDetail extends React.Component {
             <BizImageList images={this.state.biz.images}/>
             <BizInfo biz={ this.state.biz } />
             <View style={ styles.panelButtons }>
-              <ShowIf condition={this.state.biz.website}>
+              <ShowIf condition={this.state.biz.website != null}>
                 <Button buttonStyle={ styles.btnAction }
                         raised
                         icon={ {

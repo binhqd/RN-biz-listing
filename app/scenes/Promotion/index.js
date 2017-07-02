@@ -61,8 +61,6 @@ class Promotion extends React.Component {
       catID = itemValue;
     }
 
-    console.log(catID);
-
     Promotions.actions.filterByCat.request({catID: catID, name: ''})
     .then(response => {
       this.setState({
