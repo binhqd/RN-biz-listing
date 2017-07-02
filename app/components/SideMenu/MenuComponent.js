@@ -27,14 +27,22 @@ class MenuComponent extends React.Component {
     this.props.navigation.navigate('ListPromotions');
   }
 
+  goHome() {
+    this.props.navigation.navigate('Home');
+  }
+
   render() {
     let logo = require('../../assets/images/app-logo.png');
 
     return (
       <View style={ styles.sideMenu }>
-        <View style={ styles.header }>
-          <Image style={ styles.appLogo } source={ logo } />
-        </View>
+        <TouchableHighlight underlayColor='rgba(0,0,0,0)'
+          onPress={ this.goHome.bind(this) }>
+          <View style={ styles.header }>
+            <Image source={ logo }  style={ styles.appLogo }/>
+
+          </View>
+        </TouchableHighlight>
         <ScrollView style={ styles.scrollContainer }>
         <List containerStyle={ styles.menuContainer }>
           <ListItem  onPress={ this.gotoAbout.bind(this) } title='Giới thiệu' />

@@ -19,6 +19,12 @@ class LayoutWithSideBar extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.setState({
+      isOpen: false
+    })
+  }
+
   onSideMenuChange(isOpen: boolean) {
     this.setState({
       isOpen: isOpen
