@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import CONFIG from '../../constants';
-
 import Dimensions from 'Dimensions'
+
 let width = Dimensions.get('window').width;
+let Lightbox = require('react-native-lightbox');
 
 class BizImageList extends React.Component {
   constructor(props, context) {
@@ -29,6 +30,12 @@ class BizImageList extends React.Component {
     this.setState({groups: groups})
   }
 
+  renderLightBox(item) {
+    return (
+      <Image style={ {flex: 1} } resizeMode="contain" source={ {uri: `${CONFIG.STATIC_URL}/${item.container}/${item.name}`} } />
+    );
+  }
+
   componentDidMount() {
     this.grouping(this.state.images, this.cols);
   }
@@ -49,9 +56,15 @@ class BizImageList extends React.Component {
             for (let i = 0; i < this.cols; i++) {
               let item = group[i];
               if (typeof item != "undefined") {
-                images.push(<Image key={i} style={ styles.bizThumbnail } source={ {uri: `${CONFIG.STATIC_URL}/${item.container}/${item.name}`} } />);
+                images.push(
+                  <Lightbox underlayColor="white" key={i} renderContent={this.renderLightBox.bind(this, item)}>
+                    <Image style={ styles.bizThumbnail } source={ {uri: `${CONFIG.STATIC_URL}/${item.container}/${item.name}`} } />
+                  </Lightbox>
+                );
               } else {
-                images.push(<Image key={i} style={ styles.bizThumbnail } source={ {uri: `http://via.placeholder.com/350x150`} } />);
+                images.push(
+                  <Image key={i} style={ styles.bizThumbnail } source={ {uri: `http://via.placeholder.com/350x150`} } />
+                );
               }
 
             }
