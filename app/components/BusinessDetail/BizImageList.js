@@ -33,6 +33,12 @@ class BizImageList extends React.Component {
     this.grouping(this.state.images, this.cols);
   }
 
+  componentWillUnmount() {
+    this.setState({
+      groups: []
+    })
+  }
+
   render() {
     return (
       <View style={ styles.container}>
