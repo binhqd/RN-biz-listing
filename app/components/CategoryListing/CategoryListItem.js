@@ -38,11 +38,11 @@ let styles = StyleSheet.create({
     margin: 10,
     width: 100,
     height: 120,
-    backgroundColor: '#F6F6F6',
+    /*backgroundColor: '#F6F6F6',*/
     alignItems: 'center',
-    borderWidth: 1,
+    /*borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#CCC'
+    borderColor: '#CCC'*/
   },
   thumb: {
     width: 64,

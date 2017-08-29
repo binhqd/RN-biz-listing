@@ -41,8 +41,8 @@ class LayoutWithSideBar extends React.Component {
 
     return (
       <SideMenu isOpen={ this.state.isOpen }
-                onChange={ this.onSideMenuChange.bind(this) }
-                menu={ this.menu }>
+        onChange={ this.onSideMenuChange.bind(this) }
+        menu={ this.menu }>
         {this.props.children}
       </SideMenu>
     );

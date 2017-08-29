@@ -24,7 +24,7 @@ class BizItem extends React.Component {
       <TouchableHighlight underlayColor='rgba(0,0,0,0)'
         onPress={ () => this.props.navigation.navigate('BizDetail', this.props.biz) }>
         <View style={ styles.row }>
-          <View>
+          <View style={{display:'flex', borderRadius: 5}}>
             <Image style={ styles.thumb } source={ img } />
           </View>
           <View style={ { flex: 1, flexDirection: 'column', marginLeft: 5 } }>
@@ -52,7 +52,9 @@ let styles = StyleSheet.create({
   },
   thumb: {
     width: 64,
-    height: 64
+    height: 64,
+    borderRadius: 5,
+    display: 'flex'
   },
   text: {
     margin: 5,

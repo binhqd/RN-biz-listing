@@ -11,15 +11,17 @@ class Home extends React.Component {
     const {state, setParams} = navigation;
     return {
       title: 'Doanh Nghiệp TP Đà Nẵng',
+      headerStyle: styles.headerStyle,
+      headerTitleStyle: styles.headerTitleStyle,
       headerRight: (
       <Icon name='bars'
-            type='font-awesome'
-            color='#000'
-            iconStyle={ {
-                          marginRight: 20
-                        } }
-            onPress={ () => state.params.handleMenuToggle() } />
-
+        type='font-awesome'
+        color='#eee'
+        underlayColor='#e6e7e9'
+        iconStyle={ {
+          // marginRight: 20
+        } }
+        onPress={ () => state.params.handleMenuToggle() } />
       )
     };
   };
@@ -72,19 +74,22 @@ class Home extends React.Component {
       <LayoutWithSideBar navigation={ this.props.navigation }>
         <View style={ styles.homeContainer }>
           <SearchBar round
+            inputStyle={styles.searchInput}
+            containerStyle={styles.searchContainer}
             onChangeText={this.filterCategories.bind(this)}
-            placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
+            lightTheme={true}
+          placeholder='Tìm kiếm lĩnh vực doanh nghiệp' />
           {
             this.ds.getRowCount ?
-            (<ListView contentContainerStyle={ styles.list }
-                      dataSource={ this.state.dataSource }
-                      enableEmptySections
-                      renderRow={ (rowData) => {
-                                    let imgSource = this.state.images[Math.floor(Math.random() * this.state.images.length)];
-                                    return <CategoryListItem category={ rowData }
-                                                             image={ imgSource }
-                                                             navigation={ this.props.navigation } />
-                                                           } } />)
+              (<ListView contentContainerStyle={ styles.list }
+                dataSource={ this.state.dataSource }
+                enableEmptySections
+                renderRow={ (rowData) => {
+                  let imgSource = this.state.images[Math.floor(Math.random() * this.state.images.length)];
+                  return <CategoryListItem category={ rowData }
+                    image={ imgSource }
+                    navigation={ this.props.navigation } />
+                } } />)
             :
             (<View>
               <Text>No Results</Text>
@@ -102,13 +107,26 @@ var styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff'
+    backgroundColor: '#e6e7e9'
   },
   list: {
     justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    backgroundColor: '#e6e7e9'
+  },
+  searchInput: {
     backgroundColor: '#fff'
+  },
+  searchContainer: {
+    backgroundColor: '#e6e7e9'
+  },
+  headerStyle: {
+    backgroundColor: '#109d58',
+    paddingRight: 20
+  },
+  headerTitleStyle: {
+    color: '#eee'
   }
 });
 

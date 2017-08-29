@@ -72,7 +72,7 @@ let styles = StyleSheet.create({
   },
   header: {
     display:'flex',
-    backgroundColor: '#fff',
+    backgroundColor: '#bdd9e7',
     flexDirection: 'column',
     alignItems: 'center',
     height: 100,
